@@ -1,0 +1,990 @@
+#: import Factory kivy.factory.Factory
+
+<KnnPopup>
+	auto_dismiss:False
+	size_hint:0.5,0.9
+	pos_hint:{'center_x':0.5,'top':1}
+	title:'KNN Hyper-parameters'
+	
+	BoxLayout:
+		orientation:'vertical'
+		
+		GridLayout:
+			cols:2
+			rows:8
+			padding:[5,0,5,0]
+
+			Label:
+				text:'n_neighbors'
+			TextInput:
+				id:n_neighbors
+				multiline:False
+				hint_text:'int, default=5'
+				
+			Label:
+				text:'leaf_size'
+			TextInput:
+				id:leaf_size
+				multiline:False
+				hint_text:'int, default=30'
+
+			Label:
+				text:'weights'
+			Spinner:
+				id:weights_spinner
+				text:'Select Param'
+				values:['None','uniform','distance']
+
+			Label:
+				text:'algorithm'
+			Spinner:
+				id:algorithm_spinner
+				text:'Select Param'
+				values:['auto','ball_tree','kd_tree','brute']
+
+		BoxLayout:
+			orientation:'horizontal'
+
+			Button:
+				text:'Train (Default param)'
+				size_hint:0.5,0.2
+				on_release:root.TrainKnn()
+			Button:
+				text:'Train (User param)'
+				size_hint:0.5,0.2
+				on_release:root.TrainKnn(n_neighbors.text,leaf_size.text,weights_spinner.text,algorithm_spinner.text)
+			Button:
+				text:'Close'
+				size_hint:0.5,0.2
+				on_release: root.dismiss()
+
+<SVMPopup>
+	auto_dismiss:False
+	size_hint:0.5,0.9
+	pos_hint:{'center_x':0.5,'top':1}
+	title:'SVM Hyper-parameters'
+	
+	BoxLayout:
+		orientation:'vertical'
+		
+		GridLayout:
+			cols:2
+			rows:8
+			padding:[5,0,5,0]
+
+			Label:
+				text:'degree'
+			TextInput:
+				id:degree
+				multiline:False
+				hint_text:'int, default=3'
+			
+			Label:
+				text:'max_iter'
+			TextInput:
+				id:max_iter_SVM
+				multiline:False
+				hint_text:'int, default=-1 for no limit'
+			
+			Label:
+				text:'random_state'
+			TextInput:
+				id:random_state_SVM
+				multiline:False
+				hint_text:'int, RandomState instance or None, default=None'
+
+			Label:
+				text:'kernel'
+			Spinner:
+				id:kernel_spinner
+				text:'Select Param'
+				values:['linear','poly','rbf','sigmoid','precomputed']
+
+		BoxLayout:
+			orientation:'horizontal'
+
+			Button:
+				text:'Train (Default param)'
+				size_hint:0.5,0.2
+				on_release:root.TrainSVM()
+			Button:
+				text:'Train (User param)'
+				size_hint:0.5,0.2
+				on_release:root.TrainSVM(degree.text,max_iter_SVM.text,random_state_SVM.text,kernel_spinner.text)
+			Button:
+				text:'Close'
+				size_hint:0.5,0.2
+				on_release: root.dismiss()
+
+<NBpopup>
+	auto_dismiss:False
+	size_hint:0.5,0.9
+	pos_hint:{'center_x':0.5,'top':1}
+	title:'Naive Bayes Hyper-parameters'
+	
+	BoxLayout:
+		orientation:'vertical'
+		
+		GridLayout:
+			cols:2
+			rows:8
+			padding:[5,0,5,0]
+
+			Label:
+				text:'priors'
+			TextInput:
+				id:priors
+				multiline:False
+				hint_text:'array-like of shape (n_classes,), default=None'
+			
+			Label:
+				text:'var_smoothing'
+			TextInput:
+				id:var_smoothing
+				multiline:False
+				hint_text:'float, default=1e-9'
+
+		BoxLayout:
+			orientation:'horizontal'
+
+			Button:
+				text:'Train (Default param)'
+				size_hint:0.5,0.2
+				on_release:root.TrainNB()
+			Button:
+				text:'Train (User param)'
+				size_hint:0.5,0.2
+				on_release:root.TrainNB(priors.text,var_smoothing.text)
+			Button:
+				text:'Close'
+				size_hint:0.5,0.2
+				on_release: root.dismiss()
+
+<LogRegPopup>
+	auto_dismiss:False
+	size_hint:0.5,0.9
+	pos_hint:{'center_x':0.5,'top':1}
+	title:'Losigtic Regression Hyper-parameters'
+	
+	BoxLayout:
+		orientation:'vertical'
+		
+		GridLayout:
+			cols:2
+			rows:8
+			padding:[5,0,5,0]
+
+			Label:
+				text:'max_iter'
+			TextInput:
+				id:max_iter_LogReg
+				multiline:False
+				hint_text:'int, default=100'
+
+			Label:
+				text:'random_state'
+			TextInput:
+				id:random_state_LogReg
+				multiline:False
+				hint_text:'int, RandomState instance, default=None'
+			
+			Label:
+				text:'penalty'
+			Spinner:
+				id:penalty_spinner
+				text:'Select Param'
+				values:['l1','l2','elasticnet','None']
+				
+			Label:
+				text:'solver'
+			Spinner:
+				id:solver_spinner
+				text:'Select Param'
+				values:['lbfgs','liblinear','newton-cg','newton-cholesky','sag','saga']
+
+			
+			Label:
+				text:'multi_class'
+			Spinner:
+				id:multi_class_spinner
+				text:'Select Param'
+				values:['auto','ovr','multinomial']
+			
+		BoxLayout:
+			orientation:'horizontal'
+
+			Button:
+				text:'Train (Default param)'
+				size_hint:0.5,0.2
+				on_release:root.TrainLogReg()
+			Button:
+				text:'Train (User param)'
+				size_hint:0.5,0.2
+				on_release:root.TrainLogReg(max_iter_LogReg.text,random_state_LogReg.text,penalty_spinner.text,solver_spinner.text,multi_class_spinner.text)
+			Button:
+				text:'Close'
+				size_hint:0.5,0.2
+				on_release: root.dismiss()
+
+<DTPopup>
+	auto_dismiss:False
+	size_hint:0.5,0.9
+	pos_hint:{'center_x':0.5,'top':1}
+	title:'Decision Tree Hyper-parameters'
+
+	BoxLayout:
+		orientation:'vertical'
+		
+		GridLayout:
+			cols:2
+			rows:12
+			padding:[5,0,5,0]
+
+
+			Label:
+				text:'max_depth'
+			TextInput:
+				id:max_depth_DT
+				multiline:False
+				hint_text:'int, default=None'
+
+			Label:
+				text:'random_state'
+			TextInput:
+				id:random_state_DT
+				multiline:False
+				hint_text:'int, RandomState instance or None, default=None'
+
+			Label:
+				text:'criterion'
+			Spinner:
+				id:criterion_spinner
+				text:'Select Param'
+				values:['gini','entropy','log_loss']
+
+			Label:
+				text:'splitter'
+			Spinner:
+				id:splitter_spinner
+				text:'Select Param'
+				values:['best','random']
+
+		BoxLayout:
+			orientation:'horizontal'
+
+			Button:
+				text:'Train (Default param)'
+				size_hint:0.5,0.2
+				on_release:root.TrainDT()
+			Button:
+				text:'Train (User param)'
+				size_hint:0.5,0.2
+				on_release:root.TrainDT(max_depth_DT.text,random_state_DT.text,criterion_spinner.text,splitter_spinner.text)
+			Button:
+				text:'Close'
+				size_hint:0.5,0.2
+				on_release:root.dismiss()
+
+<RFPopup>
+	auto_dismiss:False
+	size_hint:0.5,0.9
+	pos_hint:{'center_x':0.5,'top':1}
+	title:'Random Forest Hyper-parameters'
+
+	BoxLayout:
+		orientation:'vertical'
+		
+		GridLayout:
+			cols:2
+			rows:12
+			padding:[5,0,5,0]
+
+
+			Label:
+				text:'n_estimators'
+			TextInput:
+				id:n_estimators
+				multiline:False
+				hint_text:'int, default=100'
+
+			Label:
+				text:'max_depth'
+			TextInput:
+				id:max_depth_RF
+				multiline:False
+				hint_text:'int, default=None'
+
+			Label:
+				text:'random_state'
+			TextInput:
+				id:random_state_RF
+				multiline:False
+				hint_text:'int, RandomState instance or None, default=None'
+
+			Label:
+				text:'criterion'
+			Spinner:
+				id:criterion_spinner_RF
+				text:'Select Param'
+				values:['gini','entropy','log_loss']
+
+		BoxLayout:
+			orientation:'horizontal'
+
+			Button:
+				text:'Train (Default param)'
+				size_hint:0.5,0.2
+				on_release:root.TrainRF()
+			Button:
+				text:'Train (User param)'
+				size_hint:0.5,0.2
+				on_release:root.TrainRF(n_estimators.text,max_depth_RF.text,random_state_RF.text,criterion_spinner_RF.text)
+			Button:
+				text:'Close'
+				size_hint:0.5,0.2
+				on_release:root.dismiss()
+
+<PanelDesign>:
+	id:panelDesign
+	do_default_tab: False
+	tab_width:150
+
+	TabbedPanelItem:
+        id:uploadpanel
+		text:'Upload'
+
+		BoxLayout:
+			orientation:'vertical'
+		
+			BoxLayout:
+				orientation:'horizontal'
+				size_hint_y:None
+				height:30
+					
+				Button:
+					id:uploadBtn
+					text:'Choose'
+					width:120
+					height:30
+					on_press:root.chooseDatasetFolder()
+						
+				Label:
+					text:'Select Dataset Folder'
+					size_hint_x:None
+					width:150
+    		Label:
+        		id:datasetPath
+        		text:''
+        		size_hint_y: None
+        		height:30
+						
+			GridLayout:
+				cols:2
+				rows:1
+				size_hint:0.6,0.1
+				pos_hint:{'center_x':0.5,'center_y':0.5}
+
+				CheckBox:
+					pos_hint:{'center_x':0.5,'center_y':0.5}
+					on_active:root.CheckBuiltin(self.active)
+
+				Label:						
+					text:'Use built-in dataset'
+					pos_hint:{'center_x':0.5,'center_y':0.5}
+
+			FileChooserListView:
+				id:filechooser
+				path:'C:\Codes\Python\VisualML\datasets'
+				disabled:True
+				on_selection:panelDesign.SelectedFileChooser(filechooser.selection)
+
+			GridLayout:
+				cols:2
+				row_force_default:True
+				size_hint:0.6,0.7
+				pos_hint:{'center_x':0.5,'center_y':0.5}
+				row_default_height:40
+				padding:[5,0,5,0]
+
+				Label:
+					id:dname
+					text:'Dataset name:'
+				Label:
+					id:dname_val
+					text:''
+
+				Label:
+					id:drow
+					text:'Number of rows:'
+				Label:
+					id:drow_val
+					text:''
+
+				Label:
+					id:dcol
+					text:'Number of columns:'
+				Label:
+					id:dcol_val
+					text:''
+
+				Label:
+					id:dcolName
+					text:'Columns:'
+				Label:
+					id:dcolName_val
+					text:''
+
+	TabbedPanelItem:
+		id:viewinfopanel
+		text:'View more info'
+    
+    	BoxLayout:
+            orientation: 'vertical'
+            row_force_default:True
+			row_default_height:60
+            Button:
+				text: "Load Data"
+            	size_hint: None, None
+            	size: "90dp", "50dp"
+				pos_hint:{'center_x':0.5,'center_y':0.6}
+            	on_press: root.load_data()
+            BoxLayout:
+            	orientation: 'vertical'
+            	ScrollView:
+            		size: 300, 20
+            		do_scroll_y:True
+            		do_scroll_x:False
+    				Label:
+        				id: data_label
+        				text: ""
+        				size_hint_y: None
+        				height: 300
+        				text_size:self.size
+        				halign: "center"
+        				valign: "center"
+        	GridLayout:
+				cols:3
+				size_hint_y: None
+    			height: self.minimum_height
+				row_force_default:True
+				row_default_height:60
+				padding:[4,0,4,0]
+				Label:
+					markup: True
+					text:'Enter Column Index [b] Features [/b] (Start - Stop) :'
+					text_size:self.size
+					halign: "center"
+        			valign: "center"
+				TextInput:
+					id:features1
+					multiline:False
+					hint_text:'E.g., 0,1,2'
+				TextInput:
+					id:features2
+					multiline:False
+					hint_text:'E.g., 0,1,2'
+            GridLayout:
+				cols:2
+				size_hint_y: None
+    			height: self.minimum_height
+				row_force_default:True
+				row_default_height:60
+				padding:[4,0,4,0]
+				Label:
+					markup:True
+					text:'Enter Column Index [b] Labels [/b] :'
+				TextInput:
+					id:labels
+					multiline:False
+					hint_text:'E.g., 0,1,2'
+        			
+            GridLayout:
+				cols:3
+				size_hint_y: None
+    			height: self.minimum_height
+				row_force_default:True
+				row_default_height:60
+				padding:[4,0,4,0]
+				Label:
+					markup: True
+					text:"Number of Null Values In [b] Features[/b]:"
+    			Label:
+        			id: featureNull
+        			text: ""
+        		Button:
+					text: "Show Null Values"
+            		on_press: root.fea_null()
+            	Label:
+					markup: True
+					text:"Number of Null Values In [b] Labels[/b]:"
+				Label:
+        			id: labelNull
+        			text: ""
+				Button:
+					text: "Show Null Values"
+            		on_press: root.lab_null()
+            	Label:
+            		markup: True
+					text:"Number of Unique Values In [b] Labels[/b]:"
+				Label:
+        			id: labelUnique
+        			text: ""
+				Button:
+					text: "Show Unique Values"
+            		on_press: root.lab_uni()
+
+        	Button:
+				text: "Confirm"
+            	size_hint: None, None
+            	size: "150dp", "50dp"
+				pos_hint:{'center_x':0.5,'center_y':0.6}
+            	on_press: root.viewbtn()
+	
+    TabbedPanelItem:
+		id:preprocesspanel
+        text:'Pre-processing'
+		
+        BoxLayout:
+            orientation:'vertical'
+
+			BoxLayout:
+				orientation:'horizontal'
+
+				Label:
+					text:'Columns to drop:'
+				BoxLayout:
+					orientation:'vertical'
+					Label:
+						text:'Column Index(es)'
+						font_size:14
+					TextInput:
+						id:col_drop_ip
+						multiline:False
+						hint_text:'E.g., 0,2,4'
+						size_hint:(1,0.8)
+				Button:
+					text:'Drop'
+					on_release:root.ColToDrop(col_drop_ip.text)
+			Label:
+				text:''
+			
+			BoxLayout:
+				orientation:'horizontal'
+				Label:
+					id:imputation_label
+					text:'Imputation technique:'
+				BoxLayout:
+					orientation:'vertical'
+					Label:
+						text:'Column Index(es)'
+						font_size:14
+					TextInput:
+						id:col_imp_ip
+						multiline:False
+						hint_text:'E.g., 0,2,4'
+						size_hint:(1,0.8)
+				BoxLayout:
+					orientation:'vertical'
+					Button:
+						id:col_imp_btn
+						text:'Confirm Column(s)'
+						on_release:root.ImpCol()
+					Spinner:
+						id:imputation_spinner
+						text:'Select Technique'
+						values:['None','Drop','Mean','Median','Mode']
+						on_text:root.ImpTech(imputation_spinner.text)				
+			Label:
+				text:''
+
+			BoxLayout:
+				orientation:'horizontal'
+				Label:
+					id:cat_to_num
+					text:'Mapping categorical to numerical:'
+				BoxLayout:
+					orientation:'vertical'
+					Label:
+						text:'Column Index(es)'
+						font_size:14
+					TextInput:
+						id:cat_to_num_ip
+						multiline:False
+						size_hint:(1,0.8)
+				BoxLayout:
+					orientation:'vertical'
+					Button:
+						id:cat_to_num_btn
+						text:'Confirm Column(s)'
+						on_release:root.CatToNum()
+			Label:
+				text:''
+			
+			BoxLayout:
+				orientation:'horizontal'
+				Label:
+					id:scaling_label
+					text:'Scaling technique:'
+				BoxLayout:
+					orientation:'vertical'
+					Spinner:
+						id:scaling_spinner
+						text:'Select Technique'
+						values:['None','Standardization','Min-Max Scaling']
+						on_text:root.ScalingTech(scaling_spinner.text)
+			Label:
+				text:''
+			Label:
+				text:''
+			Label:
+				text:''
+
+	TabbedPanelItem:
+		id:splitingpanel
+		text:'Data Spliting'
+		BoxLayout:
+            orientation:'vertical'
+            size:root.width,root.height
+			GridLayout:
+
+				cols:1
+				row_force_default:True
+				row_default_height:70
+				padding:[4,0,4,0]
+
+				Label:
+            		text:'Data Splitting'
+            		font_size: 30
+
+				Slider:
+					id:slide
+					min:1
+					max:100
+					step:1
+					value: 0.0
+					value_track: True
+					value_track_color: 1, 0, 0, 1
+					padding:50
+					value:30
+					on_value:root.slide_it(*args)
+
+        		Label:
+        			id:slidela
+            		text:'Enter Split Percentage (Default 30)'
+
+            	GridLayout:
+					cols:2
+					rows:2
+					size:root.width,root.height
+					row_force_default:True
+					row_default_height:70
+					padding:[4,0,4,0]
+
+            		Label:
+            			text:'Random State'
+            		TextInput:
+						id:rs
+						hint_text:'Enter Random State (Default 0)'
+						multiline:False
+						size:50,50
+
+            	GridLayout:
+					cols:3
+					size:root.width,root.height
+					row_force_default:True
+					row_default_height:70
+					padding:[4,0,4,0]
+
+            		Label:
+            			text:'Shuffle'
+            		Label:
+            			id:shuffleflag
+            			text:""
+            		Spinner:
+						id:checkbox
+						text:'Select True or False'
+						values:['True','False']	
+            Button:
+            	id:confirmBtn
+				text:'Split (User Param)'
+				size_hint:(.2,.2)
+				pos_hint:{'center_x':0.5,'center_y':0.6}
+				on_press:root.splitdata(slidela.text,rs.text,checkbox.text)
+			Button:
+				text:'Split (Default param)'
+				size_hint:(.2,.2)
+				pos_hint:{'center_x':0.5,'center_y':0.6}
+				on_release:root.splitdata()
+	
+	TabbedPanelItem:
+		id:eda
+		text:'EDA'
+		BoxLayout:
+            orientation:'vertical'
+            lxaxis:lxaxis
+            lyaxis:lyaxis
+			sxaxis:sxaxis
+			syaxis:syaxis
+			bxaxis:bxaxis
+			byaxis:byaxis
+			haxis:haxis
+			EDATab:
+				do_default_tab: False
+				TabbedPanelItem:
+					id:LineG
+					text:"LineGraph"
+					BoxLayout:
+						orientation:'vertical'
+						GridLayout:
+							cols:2
+							row_force_default:True
+							row_default_height:70
+							padding:[4,0,4,0]
+							Label:
+								text:'Enter Column Index for X Axis:'
+							TextInput:
+								id:lxaxis
+								multiline:False
+								hint_text:'E.g., 0,1,2'
+							Label:
+								text:'Enter Column Index for Y Axis:'
+							TextInput:
+								id:lyaxis
+								multiline:False
+								hint_text:'E.g., 0,1,2'
+							
+
+						Button:
+							id:linegraphbtn
+							text:'Line Graph'
+							on_press:root.linegraph()
+							size_hint:(.2,.2)
+							pos_hint:{'center_x':0.5,'center_y':0.6}
+
+					
+				TabbedPanelItem:
+					id:BarG
+					text:"BarGraph"
+					BoxLayout:
+						orientation:'vertical'
+						GridLayout:
+							cols:2
+							row_force_default:True
+							row_default_height:70
+							padding:[4,0,4,0]
+							Label:
+								text:'Enter Column Index for X Axis:'
+							TextInput:
+								id:bxaxis
+								multiline:False
+								hint_text:'E.g., 0,1,2'
+								
+							Label:
+								text:'Enter Column Index for Y Axis:'
+							TextInput:
+								id:byaxis
+								multiline:False
+								hint_text:'E.g., 0,1,2'
+						
+						Button:
+							id:bargraphbtn
+							text:'Bar Graph'
+							on_press:root.bargraph()
+							size_hint:(.2,.2)
+							pos_hint:{'center_x':0.5,'center_y':0.6}
+
+
+				TabbedPanelItem:
+					id:ScatterG
+					text:"ScatterGraph"
+					BoxLayout:
+						orientation:'vertical'
+						GridLayout:
+							cols:2
+							row_force_default:True
+							row_default_height:70
+							padding:[4,0,4,0]
+							Label:
+								text:'Enter Column Index for X Axis:'
+							TextInput:
+								id:sxaxis
+								multiline:False
+								hint_text:'E.g., 0,1,2'
+								
+							Label:
+								text:'Enter Column Index for Y Axis:'
+							TextInput:
+								id:syaxis
+								multiline:False
+								hint_text:'E.g., 0,1,2'
+
+								
+						Button:
+							id:scattergraphbtn
+							text:'Scatter Graph'
+							on_press:root.scattergraph()
+							size_hint:(.2,.2)
+							pos_hint:{'center_x':0.5,'center_y':0.6}
+
+				TabbedPanelItem:
+					id:HistogramG
+					text:"Histogram"
+					BoxLayout:
+						orientation:'vertical'
+						GridLayout:
+							cols:2
+							row_force_default:True
+							row_default_height:70
+							padding:[4,0,4,0]
+							Label:
+								text:'Enter Column Index for X Axis:'
+							TextInput:
+								id:haxis
+								multiline:False
+								hint_text:'E.g., 0,1,2'
+							
+						Button:
+							id:histgraphbtn
+							text:'Histogram Graph'
+							on_press:root.histograph()
+							size_hint:(.2,.2)
+							pos_hint:{'center_x':0.5,'center_y':0.6}
+
+	TabbedPanelItem:
+		id:trainingpanel
+		text:'Training'
+
+		BoxLayout:
+			orientation:'vertical'
+			Accordion:
+				orientation:'vertical'
+
+				AccordionItem:
+					title:'Supervised'
+					collapse:False
+					GridLayout:
+						cols:3
+						rows:2
+						padding:[5,0,5,0]
+						
+						Button:
+							id:KNNbtn
+							text:'K-Nearest Neighbor'
+							on_release:Factory.KnnPopup().open()
+							on_press:root.ModelName(KNNbtn.text)
+						Button:
+							text:'Support Vector Machine'
+							on_release:Factory.SVMPopup().open()
+						Button:
+							text:'Naive-Bayes'
+							on_release:Factory.NBpopup().open()
+						Button:
+							id:LogRegbtn
+							text:'Logistic Regression'
+							on_release:Factory.LogRegPopup().open()
+							on_press:root.ModelName(LogRegbtn.text)
+						Button:
+							text:'Decision Tree'
+							on_release:Factory.DTPopup().open()
+						Button:
+							text:'Random Forest'
+							on_release:Factory.RFPopup().open()
+
+				AccordionItem:
+					title:'Unsupervised'
+					GridLayout:
+						cols:3
+						rows:2
+						padding:[5,0,5,0]
+
+						Button:
+							text:'K-Means'
+						Button:
+							text:'DBSCAN'
+						Button:
+							text:'Gaussian Mixture'
+						Label:
+							text:''
+			GridLayout:
+				rows:1
+				cols:2
+				size_hint:1,0.08
+
+				Label:
+					id:trainingstatus
+					text:'Training status: -'
+				Button:
+					text:'Train'
+					on_release:root.BeginTraining()
+	
+	TabbedPanelItem:
+		id:evalpanel
+		text:'Evaluation'
+
+		BoxLayout:
+			orientation:'vertical'
+
+			GridLayout:
+				cols:2
+
+				GridLayout:
+					cols:2
+					rows:4
+					padding:[5,0,5,0]
+
+					Label:
+						text:'Accuracy:'
+					Label:
+						id:accuracy
+						text:'-'
+					Label:
+						text:'Precision:'
+					Label:
+						id:precision
+						text:'-'
+					Label:
+						text:'Recall:'
+					Label:
+						id:recall
+						text:'-'
+					Label:
+						text:'F1-Score:'
+					Label:
+						id:f1
+						text:'-'
+				BoxLayout:
+					orientation:'vertical'
+
+					Label:
+						text:'Confusion matrix'
+						size_hint:1,0.2
+					Image:
+						id:confusion_matrix
+						source:''
+			
+			Button:
+				text:'Evaluate the model'
+				size_hint:0.5,0.2
+				on_release:root.UpdateScore()
+
+	TabbedPanelItem:
+		text:'Model visualization'	
+
+		BoxLayout:
+			orientation:'vertical'
+			GridLayout:
+				rows:1
+				cols:3
+				size_hint:1,0.2
+				Label:
+					
+				Button:
+					text:'Generate'
+					#size_hint:1,0.2
+					on_release:root.model_visualization()
+				Label:
+			Image:
+				id:modelvisimg
+				source:''
+
+				
